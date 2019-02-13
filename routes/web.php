@@ -20,6 +20,7 @@ Route::get('/checkout.html', 'PostsController@checkout');
 Route::get('/contact.html', 'PostsController@contact');
 Route::get('/product.html', 'PostsController@product');
 
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
