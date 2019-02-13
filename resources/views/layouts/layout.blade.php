@@ -8,10 +8,6 @@
 
 @include('layouts.nav')
 
-
-
-
-
     <!-- Home -->
 
 @yield('content')

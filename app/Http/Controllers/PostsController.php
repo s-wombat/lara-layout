@@ -7,21 +7,21 @@ use Illuminate\Http\Request;
 class PostsController extends Controller
 {
     public function index(){
-        return view('posts.index');
+        return view('index');
     }
     public function categories(){
-        return view('posts.categories');
+        return view('categories');
     }
     public function cart(){
-        return view('posts.cart');
+        return view('cart');
     }
     public function checkout(){
-        return view('posts.checkout');
+        return view('checkout');
     }
     public function contact(){
-        return view('posts.contact');
+        return view('contact');
     }
     public function product(){
-        return view('posts.product');
+        return view('products.product');
     }
 }
