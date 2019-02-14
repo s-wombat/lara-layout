@@ -21,4 +21,8 @@
     <link rel="stylesheet" type="text/css" href="css/contact_responsive.css">
     <link rel="stylesheet" type="text/css" href="css/product.css">
     <link rel="stylesheet" type="text/css" href="css/product_responsive.css">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>

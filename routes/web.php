@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'PostsController@index');
-Route::get('/index.html', 'PostsController@index');
+Route::get('/index.html', 'PostsController@index')->name('index');
 //Route::get('/posts/{post}', 'PostsController@show');
 Route::get('/categories.html', 'PostsController@categories');
 Route::get('/cart.html', 'PostsController@cart');
