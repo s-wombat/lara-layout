@@ -91,7 +91,7 @@
             </div>
         </div>
     </div>
-
+    <a href="users">Users</a>
     {{--Login and Register--}}
     @if (Route::has('login'))
         <div class="top-right links">

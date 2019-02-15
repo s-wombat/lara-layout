@@ -23,4 +23,6 @@ Route::get('/product.html', 'PostsController@product');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/adminpanel', 'HomeController@index')->name('adminpanel');
+Route::get('users', 'UserController@index')->name('index');
+Route::delete('users/{id}', 'UserController@remove')->name('remove');
