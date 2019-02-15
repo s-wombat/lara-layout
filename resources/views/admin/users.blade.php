@@ -3,7 +3,8 @@
 @section('content')
 <div class="container">
     <ul>
-        <li><a href="index.html">Главная</a></li>
+        <li><a href="{{ url('/') }}">Главная</a></li>
+{{--        <li><a href="{{route('users.create')}}">Создать пользователя</a></li>--}}
     </ul>
     <table class="table table-striped">
         <thead>
@@ -26,19 +27,29 @@
                 <td>{{$user->phone}}</td>
                 <td>{{$user->created_at}}</td>
                 <td>
-                    <a href="">Редактировать</a>
+                    {{--<form action="{{route('users.edit', ['id'=>$user->id, 'parametr'=>rand()])}}" method="post">--}}
+                        {{--{{ csrf_field() }}--}}
+                        {{--<input type="hidden" name="_method" value="Edit" />--}}
+                        {{--<input type="submit" value="Редактировать" />--}}
+                    {{--</form>--}}
+                    <a href="{{route('users.edit', ['id'=>$user->id, 'parametr'=>rand()])}}">Редактировать</a>
                 </td>
                 <td>
-                    <form action="{{route('remove', ['id'=>$user->id])}}" method="post">
+                    <form action="{{route('users.remove', ['id'=>$user->id])}}" method="post">
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="DELETE" />
-                        <input type="submit" value="remove" />
+                        <input type="submit" value="Удалить" />
                     </form>
                 </td>
             </tr>
         @endforeach
         </tbody>
+        @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
+            </div>
+        @endif
     </table>
-    {{--{{$users->links()}}--}}
+{{--    {{$users->links()}}--}}
 </div>
 @endsection

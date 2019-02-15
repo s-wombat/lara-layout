@@ -91,7 +91,18 @@
             </div>
         </div>
     </div>
-    <a href="users">Users</a>
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex flex-row align-items-right justify-content-end">
+                        <a href="users">Список пользователей</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     {{--Login and Register--}}
     @if (Route::has('login'))
         <div class="top-right links">
