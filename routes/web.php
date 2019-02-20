@@ -40,7 +40,7 @@ prefix('admin')
                     ->name('edit');
 
                 Route::delete('/{id}', 'Admin\UserController@remove')->name('remove');
-                Route::post('/{id?}', 'Admin\UserController@store')->name('store');
+                Route::post('/{id?}', 'Admin\UserController@save')->name('save');
             });
 
     });

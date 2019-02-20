@@ -27,12 +27,12 @@
                 <td>{{$user->phone}}</td>
                 <td>{{$user->created_at}}</td>
                 <td>
-                    {{--<form action="{{route('users.edit', ['id'=>$user->id, 'parametr'=>rand()])}}" method="post">--}}
-                        {{--{{ csrf_field() }}--}}
-                        {{--<input type="hidden" name="_method" value="Edit" />--}}
-                        {{--<input type="submit" value="Редактировать" />--}}
-                    {{--</form>--}}
-                    <a href="{{route('admin.users.edit', ['id'=>$user->id])}}">Редактировать</a>
+                    <form action="{{route('admin.users.edit', ['id'=>$user->id])}}" method="get">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="edit" />
+                        <input type="submit" value="Редактировать" />
+                    </form>
+                    {{--<a href="{{route('admin.users.edit', ['id'=>$user->id])}}">Редактировать</a>--}}
                 </td>
                 <td>
                     <form action="{{route('admin.users.remove', ['id'=>$user->id])}}" method="post">

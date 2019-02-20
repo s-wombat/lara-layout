@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -40,8 +41,13 @@ class UserController extends Controller
 
         return redirect(route('admin.users.index'));
     }
-    public function store(Request $request, $id = null)
+    public function save(UserRequest $request, $id = null)
     {
+//        $request->validate([
+//            'name' => 'required|max:255',
+//            'email' => 'required|unique:users',
+//            'password' => 'required|min:6',
+//        ]);
         $user = new User();
         if ($id) {
             $user = User::find($id);
