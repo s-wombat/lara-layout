@@ -96,7 +96,7 @@
             <div class="row">
                 <div class="col">
                     <div class="d-flex flex-row align-items-right justify-content-end">
-                        <a href="{{ route('admin.users.index') }}">Список пользователей</a>
+                        <a href="{{ route('admin.users.index') }}">Админка</a>
                     </div>
                 </div>
             </div>

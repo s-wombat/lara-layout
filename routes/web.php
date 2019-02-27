@@ -42,5 +42,19 @@ prefix('admin')
                 Route::delete('/{id}', 'Admin\UserController@remove')->name('remove');
                 Route::post('/{id?}', 'Admin\UserController@save')->name('save');
             });
+        //products group
+        Route::prefix('products')
+            ->name('products.')
+            ->group(function () {
+                Route::get('/', 'Admin\ProductController@index')->name('index');
+                //showCreateForm
+                Route::get('/create', 'Admin\ProductController@showCreateForm')->name('create');
+                //showEditForm
+                Route::get('/{id}', 'Admin\ProductController@showEditForm')
+                    ->where('id', '[0-9]+')
+                    ->name('edit');
 
+                Route::delete('/{id}', 'Admin\ProductController@remove')->name('remove');
+                Route::post('/{id?}', 'Admin\ProductController@save')->name('save');
+            });
     });

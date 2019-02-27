@@ -25,11 +25,6 @@
                                 @endif
                         >
                             {{ csrf_field() }}
-                            {{--name <input name="name" value="@if(isset($user)){{$user->name}}@endif"/><br/>--}}
-                            {{--email <input name="email" value="@if(isset($user)){{$user->email}}@endif"/><br/>--}}
-                            {{--phone <input name="phone" value="@if(isset($user)){{$user->phone}}@endif"/><br/>--}}
-                            {{--password <input name="password" value=""/>--}}
-
 
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>

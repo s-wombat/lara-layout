@@ -4,6 +4,7 @@
 <div class="container">
     <ul>
         <li><a href="{{ url('/') }}">Главная</a></li>
+        <li> <a href="{{route('admin.products.index')}}">Продукты</a></li>
         <li> <a href="{{route('admin.users.create')}}">Создать пользователя</a></li>
     </ul>
     <table class="table table-striped">
@@ -32,7 +33,6 @@
                         <input type="hidden" name="_method" value="edit" />
                         <input type="submit" value="Редактировать" />
                     </form>
-                    {{--<a href="{{route('admin.users.edit', ['id'=>$user->id])}}">Редактировать</a>--}}
                 </td>
                 <td>
                     <form action="{{route('admin.users.remove', ['id'=>$user->id])}}" method="post">
