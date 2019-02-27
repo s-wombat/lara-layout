@@ -59,7 +59,7 @@ class ProductController extends Controller
 //создание картинки
         $path = public_path() . '\upload\products\\' . $product->id . '//';
         $files = $request->file('file');
-//dd($files);
+
         // если нет папки \upload\products\, то создать
         if(!file_exists($path)){
             mkdir($path, 777, true);
@@ -73,16 +73,15 @@ class ProductController extends Controller
             $img->resize(200, 300)->save($path . 'decstop_preview' . $filename);
             $img->resize(300, 200)->save($path . 'decstop' . $filename);
             $img->resize(500, 500)->save($path . 'full' . $filename);
-            Image::create(['title' => 'origin', 'image_path' => $path . 'origin' . $filename, 'product_id' => $product->id]);
-            Image::create(['title' => 'mobile_preview', 'image_path' => $path . 'mobile_preview' . $filename, 'product_id' => $product->id]);
-            Image::create(['title' => 'mobile', 'image_path' => $path . 'mobile' . $filename, 'product_id' => $product->id]);
-            Image::create(['title' => 'decstop_preview', 'image_path' => $path . 'decstop_preview' . $filename, 'product_id' => $product->id]);
-            Image::create(['title' => 'decstop', 'image_path' => $path . 'decstop' . $filename, 'product_id' => $product->id]);
-            Image::create(['title' => 'full', 'image_path' => $path . 'full' . $filename, 'product_id' => $product->id]);
+            Image::create(['title' => 'origin', 'image_path' => 'origin' . $filename, 'product_id' => $product->id]);
+            Image::create(['title' => 'mobile_preview', 'image_path' => 'mobile_preview' . $filename, 'product_id' => $product->id]);
+            Image::create(['title' => 'mobile', 'image_path' => 'mobile' . $filename, 'product_id' => $product->id]);
+            Image::create(['title' => 'decstop_preview', 'image_path' => 'decstop_preview' . $filename, 'product_id' => $product->id]);
+            Image::create(['title' => 'decstop', 'image_path' => 'decstop' . $filename, 'product_id' => $product->id]);
+            Image::create(['title' => 'full', 'image_path' => 'full' . $filename, 'product_id' => $product->id]);
         }
 
 //-------------------------------
-dd(coutn($files));
             return redirect(route('admin.products.index'));
     }
 }
