@@ -56,5 +56,6 @@ prefix('admin')
 
                 Route::delete('/{id}', 'Admin\ProductController@remove')->name('remove');
                 Route::post('/{id?}', 'Admin\ProductController@save')->name('save');
+                Route::get('/sort', 'Admin\ProductController@sort')->name('sort');
             });
     });
