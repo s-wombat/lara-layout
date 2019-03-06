@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $users = [];
-        for ($i = 1; $i <= 30; $i++){
+        for ($i = 1; $i <= 80; $i++){
             $name = 'User ' . $i;
             $email = str_random(10).'@i.ua';
             $phone = '+380' . random_int(600000000, 900000000);

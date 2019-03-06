@@ -7,6 +7,18 @@
         <li> <a href="{{route('admin.products.index')}}">Продукты</a></li>
         <li> <a href="{{route('admin.users.create')}}">Создать пользователя</a></li>
     </ul>
+    <form action="{{route('admin.users.sort')}}" method="get">
+        {{ csrf_field() }}
+        <p>Сортировать по значению: <select size="1" name="users_sort">
+                <option selected value="id" id="id">id</option>
+                <option value ="name" id="name">name</option>
+                <option value ="email" id="email">email</option>
+                <option value ="phone" id="phone">phone</option>
+                <option value ="created_at" id="date">date</option>
+            </select></p>
+        <p><input type="hidden" name="_method" value="sort" />
+            <input type="submit" value="Сортировать" /></p>
+    </form>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -50,6 +62,6 @@
             {{--</div>--}}
         {{--@endif--}}
     </table>
-{{--    {{$users->links()}}--}}
+    {{$users->links()}}
 </div>
 @endsection

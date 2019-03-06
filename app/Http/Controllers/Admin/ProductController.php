@@ -95,7 +95,7 @@ class ProductController extends Controller
     public function sort(Request $request)
     {
         $products_sort = null;
-        $name = $request->input('user_sort');
+        $name = $request->input('product_sort');
         if($name){
             $products_sort= Product::orderBy($name)->paginate(10);
         }

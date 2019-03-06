@@ -41,6 +41,7 @@ prefix('admin')
 
                 Route::delete('/{id}', 'Admin\UserController@remove')->name('remove');
                 Route::post('/{id?}', 'Admin\UserController@save')->name('save');
+                Route::get('/sort', 'Admin\UserController@sort')->name('sort');
             });
         //products group
         Route::prefix('products')

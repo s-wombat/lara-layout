@@ -10,7 +10,7 @@
 
     <form action="{{route('admin.products.sort')}}" method="get">
         {{ csrf_field() }}
-        <p>Сортировать по значению: <select size="1" name="user_sort">
+        <p>Сортировать по значению: <select size="1" name="product_sort">
                 <option selected value="id" id="id">id</option>
                 <option value ="name" id="name">name</option>
                 <option value ="articul" id="articul">articul</option>

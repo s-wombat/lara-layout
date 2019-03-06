@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(10);
         return view('admin.users.list', [
             'users' => $users
         ]);
@@ -57,4 +57,18 @@ class UserController extends Controller
 
         return redirect(route('admin.users.index'));
 }
+    public function sort(Request $request)
+    {
+        $users_sort = null;
+        $name = $request->input('users_sort');
+        if($name){
+            $users_sort= User::orderBy($name)->paginate(10);
+        }
+        else{
+            $users_sort= User::paginate(10);
+        }
+        return view('admin.users.list', [
+            'users' => $users_sort
+        ]);
+    }
 }
