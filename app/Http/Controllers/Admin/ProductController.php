@@ -12,7 +12,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = new Product();
+        $products = Product::paginate(10);
+//        $products = Product::all();
         return view('admin.products.list', [
             'products' => $products
         ]);
@@ -93,20 +94,17 @@ class ProductController extends Controller
 
     public function sort(Request $request)
     {
-        $products_sort = new Product();
+        $products_sort = null;
         $name = $request->input('user_sort');
-//        dd($name);
         if($name){
-            $products_sort->all()->sortBy($name);
+            $products_sort= Product::orderBy($name)->paginate(10);
         }
-
+        else{
+            $products_sort= Product::paginate(10);
+        }
         return view('admin.products.list', [
             'products' => $products_sort
         ]);
-
-//        dd($products);
-//        return redirect(route('admin.products.index'));
-
     }
 
 }
