@@ -59,4 +59,20 @@ prefix('admin')
                 Route::post('/{id?}', 'Admin\ProductController@save')->name('save');
                 Route::get('/sort', 'Admin\ProductController@sort')->name('sort');
             });
+        //categories group
+//        Route::prefix('categories')
+//            ->name('categories')
+//            ->resource('category', 'Admin\CategoryController');
+        Route::resource('category', 'Admin\CategoryController');
+//            ->group(function () {
+//                Route::get('/', 'Admin\CategoryController@index')->name('index');
+//                //showCreateForm
+//                Route::get('/create', 'Admin\CategoryController@showCreateForm')->name('create');
+//                //showEditForm
+//                Route::get('/{category}', 'Admin\CategoryController@showEditForm')->name('edit');
+//
+//                Route::delete('/{category}', 'Admin\CategoryController@destroy')->name('destroy');
+//                Route::post('/{category?}', 'Admin\CategoryController@store')->name('store');
+////                Route::get('/sort', 'Admin\CategoryController@sort')->name('sort');
+//            });
     });

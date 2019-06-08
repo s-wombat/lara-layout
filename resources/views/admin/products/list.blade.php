@@ -5,6 +5,7 @@
     <ul>
         <li><a href="{{ url('/') }}">Главная</a></li>
         <li> <a href="{{route('admin.users.index')}}">Пользователи</a></li>
+        <li> <a href="{{route('admin.category.index')}}">Категории</a></li>
         <li> <a href="{{route('admin.products.create')}}">Создать продукт</a></li>
     </ul>
 
