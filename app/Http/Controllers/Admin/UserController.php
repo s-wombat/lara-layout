@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\User;
@@ -12,26 +13,34 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::paginate(5);
         return view('admin.users.list', [
             'users' => $users
         ]);
     }
 
-    public function showEditForm($id)
+    public function showEditForm(RoleController $roles, $id)
     {
         $user = User::find($id);
         if ($user === null) {
             abort(404);
         }
+        $roles = $roles->getRole();
         return view('admin.users.edit', [
-            'user' => $user
+            'user' => $user,
+            'roles' => $roles
         ]);
     }
-    public function showCreateForm()
+
+    public function showCreateForm(RoleController $roles)
     {
-        return view('admin.users.edit');
+
+        $roles = $roles->getRole();
+        return view('admin.users.edit', [
+            'roles' => $roles
+        ]);
     }
+
     public function remove($id)
     {
         $user = User::find($id);
@@ -42,13 +51,16 @@ class UserController extends Controller
 
         return redirect(route('admin.users.index'));
     }
+
+
     public function save(UserRequest $request, $id = null)
     {
         $user = new User();
         if ($id) {
             $user = User::find($id);
         }
-        $fields = ['name', 'email', 'phone'];
+        $fields = ['name', 'email', 'phone', 'role_id'];
+
         if ($request->get('password')) {
             $user->password = Hash::make($request->get('password'));
         }
@@ -56,7 +68,8 @@ class UserController extends Controller
         $user->save();
 
         return redirect(route('admin.users.index'));
-}
+    }
+
     public function sort(Request $request)
     {
         $users_sort = null;

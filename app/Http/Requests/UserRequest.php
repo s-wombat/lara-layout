@@ -30,6 +30,7 @@ class UserRequest extends FormRequest
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|numeric',
             'password' => 'required|string|min:6',
+            'role_id' => 'required|exists:roles,id',
         ];
         if($this->route('id')){
             return [];

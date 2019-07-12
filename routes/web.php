@@ -22,9 +22,9 @@ Route::get('/product.html', 'PostsController@product');
 
 Auth::routes();
 
-
 Route::
 prefix('admin')
+    ->middleware('admin')
     ->name('admin.')
     ->group(function () {
         //users group

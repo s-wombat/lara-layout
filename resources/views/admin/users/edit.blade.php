@@ -14,8 +14,6 @@
                             @endif
                         </h4>
                     </div>
-                    {{--{{dump($errors)}}--}}
-
                     <div class="card-body">
                         <form method="post"
                               @if(isset($user))
@@ -70,6 +68,23 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('role_id') ? ' is-invalid' : '' }} row">
+                                <label for="role_id" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+                                @foreach($roles as $role)
+                                    @if(isset($user->role_id))
+                                        @if($user->role_id == $role->id)
+                                            <p class="text-danger text-uppercase">{{ $role->name }}</p>
+                                        @endif
+                                    @endif
+                                @endforeach
+                                    <p>Выбрать роль:
+                                        <select size="1" name="role_id" id="role_id" class="form-control">
+                                            @foreach($roles as $role)
+                                            <option selected value="{{ $role->id }}">{{ $role->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </p>
+                            </div>
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
@@ -77,7 +92,6 @@
                                     </button>
                                 </div>
                             </div>
-                            {{--<button class="btn btn-success" type="submit">Сохранить</button>--}}
                         </form>
                     </div>
                     <div class="card-body">

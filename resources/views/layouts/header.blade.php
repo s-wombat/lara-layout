@@ -92,6 +92,8 @@
         </div>
     </div>
 
+    @if (Route::has('login'))
+        @auth
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -101,6 +103,8 @@
                 </div>
             </div>
         </div>
+        @endauth
+    @endif
 
 
     {{--Login and Register--}}

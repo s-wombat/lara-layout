@@ -27,6 +27,7 @@
             <th scope="col">name</th>
             <th scope="col">email</th>
             <th scope="col">phone</th>
+            <th scope="col">role_id</th>
             <th scope="col">created_at</th>
             <th scope="col">Редактировать</th>
             <th scope="col">Удалить</th>
@@ -39,6 +40,7 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->phone}}</td>
+                <td>{{$user->role_id}}</td>
                 <td>{{$user->created_at}}</td>
                 <td>
                     <form action="{{route('admin.users.edit', ['id'=>$user->id])}}" method="get">
