@@ -1,13 +1,13 @@
-@extends('layouts.app')
+@extends('admin.layouts._layouts')
 
 @section('content')
 <div class="container">
-    <ul>
-        <li><a href="{{ url('/') }}">Главная</a></li>
-        <li> <a href="{{route('admin.users.index')}}">Пользователи</a></li>
-        <li> <a href="{{route('admin.category.index')}}">Категории</a></li>
-        <li> <a href="{{route('admin.products.create')}}">Создать продукт</a></li>
-    </ul>
+    {{--<ul>--}}
+        {{--<li><a href="{{ url('/') }}">Главная</a></li>--}}
+        {{--<li> <a href="{{route('admin.users.index')}}">Пользователи</a></li>--}}
+        {{--<li> <a href="{{route('admin.category.index')}}">Категории</a></li>--}}
+        {{--<li> <a href="{{route('admin.products.create')}}">Создать продукт</a></li>--}}
+    {{--</ul>--}}
 
     <form action="{{route('admin.products.sort')}}" method="get">
         {{ csrf_field() }}
