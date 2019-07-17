@@ -19,6 +19,18 @@ Route::get('/checkout.html', 'PostsController@checkout');
 Route::get('/contact.html', 'PostsController@contact');
 Route::get('/product.html', 'PostsController@product');
 
+//Route::get('/products', 'ProductController@index');
+
+
+Route::prefix('products')
+    ->name('products.')
+    ->group(function (){
+    Route::get('/', 'ProductController@index')->name('index');
+    Route::get('/sort', 'ProductController@sort')->name('sort');
+    Route::get('/buy', 'ProductController@buyProduct')->name('buy');
+
+});
+
 
 Auth::routes();
 
@@ -51,19 +63,20 @@ prefix('admin')
                 //showCreateForm
                 Route::get('/create', 'Admin\ProductController@showCreateForm')->name('create');
                 //showEditForm
-                Route::get('/{id}', 'Admin\ProductController@showEditForm')
-                    ->where('id', '[0-9]+')
-                    ->name('edit');
+                Route::get('/{id}', 'Admin\ProductController@showEditForm')->where('id', '[0-9]+')->name('edit');
 
                 Route::delete('/{id}', 'Admin\ProductController@remove')->name('remove');
                 Route::post('/{id?}', 'Admin\ProductController@save')->name('save');
                 Route::get('/sort', 'Admin\ProductController@sort')->name('sort');
+//                Route::get('/choice', 'Admin\ProductController@choiceCategory')->name('choice');
+
             });
         //categories group
 //        Route::prefix('categories')
 //            ->name('categories')
 //            ->resource('category', 'Admin\CategoryController');
         Route::resource('category', 'Admin\CategoryController');
+//        Route::get('/categories', 'Admin\CategoryController@showCat')->name('showCat');
 //            ->group(function () {
 //                Route::get('/', 'Admin\CategoryController@index')->name('index');
 //                //showCreateForm

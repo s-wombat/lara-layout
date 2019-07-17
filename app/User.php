@@ -30,11 +30,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
-    function isAdmin(){
+    public function isAdmin(){
         return $this->role->name == 'admin';
 
     }
-    function getOrders(){
+    public function orders(){
         return $this->hasMany('App\Order');
     }
 }

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Product;
 use App\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\CategoryController;
 use Intervention\Image\Facades\Image as ImageInt;;
 
 class ProductController extends Controller
@@ -18,6 +20,7 @@ class ProductController extends Controller
             'products' => $products
         ]);
     }
+
     public function showEditForm($id)
     {
         $product = Product::find($id);
@@ -25,12 +28,16 @@ class ProductController extends Controller
             abort(404);
         }
         return view('admin.products.edit', [
-           'product' => $product
+           'product' => $product,
+            'categories' => Category::get()
         ]);
+
     }
     public function showCreateForm()
     {
-        return view('admin.products.edit');
+        return view('admin.products.edit', [
+            'categories' => Category::get()
+        ]);
     }
 
     /**
@@ -43,6 +50,7 @@ class ProductController extends Controller
         if ($product === null) {
             abort(404);
         }
+        $product->categories()->detach();
         $product->delete();
         return redirect(route('admin.products.index'));
     }
@@ -61,6 +69,13 @@ class ProductController extends Controller
         $fields = ['name', 'articul', 'brand', 'description', 'price', 'publish'];
         $product->fill($request->only($fields));
         $product->save();
+
+         $name = $request->input('category');
+         if($name){
+             $product->categories()->detach();
+             $product->categories()->attach($name);
+         }
+
 
 //создание картинки
         if($request->file('file')) {
@@ -106,5 +121,9 @@ class ProductController extends Controller
             'products' => $products_sort
         ]);
     }
+
+
+
+    
 
 }

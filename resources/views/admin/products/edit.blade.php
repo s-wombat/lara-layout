@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+
+
+        {{--{{ dd(App\Category::all()) }}--}}
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -79,6 +82,27 @@
                                         <strong>{{ $errors->first('price') }}</strong>
                                     </span>
                                     @endif
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('category') }}</label>
+                                <div class="col-md-6">
+                                        @if(isset($product))
+                                            @foreach($categories as $category)
+                                                @foreach($product->categories as $cat)
+                                                    @if(isset($category->id) && $category->id == $cat->pivot->category_id)
+                                                        <p style="color: red">{{ $category->title }}</p>
+                                                    @endif
+                                                @endforeach
+                                            @endforeach
+                                        @endif
+                                    <p>Выбрать категорию:
+                                        <select size="1" name="category">
+                                            @foreach($categories as $category)
+                                                <option selected value="{{ $category->id }}">{{ $category->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </p>
                                 </div>
                             </div>
                             <div class="form-group row mb-0">

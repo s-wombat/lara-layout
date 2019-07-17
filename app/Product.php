@@ -27,6 +27,13 @@ class Product extends Model
             return url('upload/products/' . $this->id . '/' . $img->image_path);
         }
     }
+
+    public function orders(){
+        return $this->belongsToMany('App\Order');
+    }
+    public function categories(){
+        return $this->belongsToMany('App\Category');
+    }
 //    public function getMobileAttribute()
 //    {
 //        $image_path = Image::where('title', '=', 'mobile')
