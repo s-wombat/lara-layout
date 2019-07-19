@@ -66,15 +66,22 @@ class ProductController extends Controller
         if ($id) {
             $product = Product::find($id);
         }
+
         $fields = ['name', 'articul', 'brand', 'description', 'price', 'publish'];
         $product->fill($request->only($fields));
         $product->save();
 
-         $name = $request->input('category');
-         if($name){
-             $product->categories()->detach();
-             $product->categories()->attach($name);
-         }
+        $list = $request->input('category');
+        if($list){
+            $listCategories = array_unique($list);
+//        dd($listCategories);
+            $product->categories()->detach();
+            foreach ($listCategories as $category_id){
+                if($category_id){
+                    $product->categories()->attach($category_id);
+                }
+            }
+        }
 
 
 //создание картинки

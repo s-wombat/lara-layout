@@ -2,9 +2,6 @@
 
 @section('content')
     <div class="container">
-
-
-        {{--{{ dd(App\Category::all()) }}--}}
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -17,8 +14,6 @@
                             @endif
                         </h4>
                     </div>
-                    {{--{{dump($errors)}}--}}
-
                     <div class="card-body">
                         <form method="post" enctype="multipart/form-data"
                               @if(isset($product))
@@ -88,18 +83,29 @@
                                 <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('category') }}</label>
                                 <div class="col-md-6">
                                         @if(isset($product))
-                                            @foreach($categories as $category)
-                                                @foreach($product->categories as $cat)
-                                                    @if(isset($category->id) && $category->id == $cat->pivot->category_id)
-                                                        <p style="color: red">{{ $category->title }}</p>
-                                                    @endif
-                                                @endforeach
-                                            @endforeach
+                                            <p style="color: red;">{{ $product->categories()->pluck('title')->implode(', ') }}</p>
                                         @endif
                                     <p>Выбрать категорию:
-                                        <select size="1" name="category">
+                                        <select size="1" name="category[]">
+                                                <option selected value=""></option>
                                             @foreach($categories as $category)
-                                                <option selected value="{{ $category->id }}">{{ $category->title }}</option>
+                                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </p>
+                                    <p>Выбрать категорию:
+                                        <select size="1" name="category[]">
+                                                <option selected value=""></option>
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </p>
+                                    <p>Выбрать категорию:
+                                        <select size="1" name="category[]">
+                                                <option selected value=""></option>
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->title }}</option>
                                             @endforeach
                                         </select>
                                     </p>
@@ -107,8 +113,16 @@
                             </div>
                             <div class="form-group row mb-0">
                                 <label for="publishCheck" class="col-md-4 col-form-label text-md-right">{{ __('Publish') }}</label>
+                                <p style="color: red;">
+                                    @if($product->publish == 0)
+                                        Не опубликовано
+                                    @else
+                                        Опубликовано
+                                    @endif
+                                </p>
                                 <div class="col-md-4">
-                                    <input type="checkbox" name="publish" class="form-check-input" id="publishCheck" value="0" />
+                                    <input type="hidden" name="publish" class="form-check-input" id="publishCheck" value="0">
+                                    <input type="checkbox" name="publish" class="form-check-input" id="publishCheck" value="1">
                                 </div>
                             </div>
                             <div class="form-group row mb-0">
