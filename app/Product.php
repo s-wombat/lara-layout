@@ -34,6 +34,8 @@ class Product extends Model
     public function categories(){
         return $this->belongsToMany('App\Category');
     }
+
+
 //    public function getMobileAttribute()
 //    {
 //        $image_path = Image::where('title', '=', 'mobile')

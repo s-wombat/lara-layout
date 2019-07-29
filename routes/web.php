@@ -25,12 +25,21 @@ Route::prefix('products')
     ->group(function (){
     Route::get('/', 'ProductController@index')->name('index');
     Route::get('/sort', 'ProductController@sort')->name('sort');
-    Route::get('/buy', 'ProductController@buyProduct')->name('buy');
+    Route::get('/{id}', 'ProductController@buyProduct')->where('id', '[0-9]+')->name('buy');
+    Route::prefix('cart')
+        ->name('cart.')
+        ->group(function (){
+            Route::get('/', 'CartController@index')->name('index');
+            Route::delete('/{id}', 'CartController@removeItem')->name('remove');
+            Route::get('/destroy', 'CartController@destroy')->name('destroy');
+            Route::get('/update/{id}', 'CartController@update')->name('update');
+    });
 
 });
 
 
 Auth::routes();
+
 
 Route::
 prefix('admin')

@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('content')
-    <div style="height: 115px; content: ''; width: 100%; color: gray;"></div>
+    <div style="height: 135px; content: ''; width: 100%; color: gray;"></div>
     <div class="container">
         <form action="{{route('products.sort')}}" method="get">
             {{ csrf_field() }}
@@ -14,6 +14,9 @@
             <p><input type="hidden" name="_method" value="sort" />
                 <input type="submit" value="Сортировать" /></p>
         </form>
+        <form action="{{ route('products.cart.index') }} " method="get">
+            <input class="btn btn-primary" type="submit" value="Корзина">
+        </form>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -24,7 +27,7 @@
                 <th scope="col">image</th>
                 <th scope="col">description</th>
                 <th scope="col">price</th>
-                <th scope="col">count</th>
+                <th scope="col">quantity</th>
                 <th scope="col">buy</th>
             </tr>
             </thead>
@@ -39,16 +42,12 @@
                     <td>{{$product->description}}</td>
                     <td>{{$product->price}}</td>
                     <td>
-                        <div class="form-group row">
-                            <label for="count" class="col-md-4 col-form-label text-md-right"></label>
-                            <div class="">
-                                <input id="count" type="text" class="form-control" name="count" value="">
-                            </div>
-                        </div>
+                        <form action="{{ route('products.buy', ['id'=>$product->id]) }}" method="get">
+                            {{ csrf_field() }}
+                                <label for="qty" class="col-md-4 col-form-label text-md-right"></label>
+                                <input id="qty" type="text" class="form-control" name="qty" placeholder="1">
                     </td>
                     <td>
-                        <form action="{{route('products.buy', ['id'=>$product->id])}}" method="get">
-                            {{ csrf_field() }}
                             <input type="hidden" name="_method" value="buy" />
                             <input type="submit" value="Купить" />
                         </form>

@@ -3,21 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 
 class ProductController extends Controller
 {
-    private $session;
-
-    public function __construct(Request $request)
-    {
-     //   $this->session = $request->session();
-    }
     public function index()
     {
         $products = Product::paginate(10);
-//        $products = Product::all();
         return view('products.products', [
             'products' => $products
         ]);
@@ -37,11 +31,43 @@ class ProductController extends Controller
             'products' => $products_sort
         ]);
     }
-    public function buyProduct(Request $request)
+    public function buyProduct(Request $request, $id)
     {
-        // $count = $request->input('count');
-        // $product = [];
-
+        $product = Product::find($id);
+        if ($product === null) {
+            abort(404);
+        }
+        if($request->input('qty')){
+            $qty = +$request->input('qty');
+        }else {
+            $qty = 1;
+        }
+        if($product){
+            $productInCart = [
+                'id' => $product['id'],
+                'name' => $product['name'],
+                'qty' => $qty,
+                'price' => $product['price']
+            ];
+            $newProduct = [];
+            array_push($newProduct, $productInCart);
+        }
+        Cart::add($newProduct);
+        return redirect(route('products.index'));
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
