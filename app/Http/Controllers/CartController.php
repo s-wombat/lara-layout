@@ -15,15 +15,15 @@ class CartController extends Controller
     public function index()
     {
         $cart = Cart::content();
-        if($cart){
             $cart = $this->costItem($cart);
-            $total = Cart::subtotal();
+            $subtotal = Cart::subtotal();
+        if(!$cart->isEmpty()){
             return view('products.cart', [
                 'cart' => $cart,
-                'total' => $total
+                'total' => $subtotal
             ]);
         }else {
-            return redirect(route('products.index'));
+            return redirect()->route('products.index')->with('message', 'Корзина пуста');
         }
     }
     /**
@@ -60,7 +60,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //  Cart::store('user_id');
     }
 
     /**

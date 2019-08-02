@@ -14,7 +14,17 @@
             <p><input type="hidden" name="_method" value="sort" />
                 <input type="submit" value="Сортировать" /></p>
         </form>
-        <form action="{{ route('products.cart.index') }} " method="get">
+        @if(\Session::has('message'))
+            <div class="col-md-12">
+                <h3 style="color:red;">{{ \Session::get('message') }}</h3>
+            </div>
+        @endif
+        @if(\Session::has('success'))
+            <div class="col-md-12">
+                <h3 style="color:blue;">{{ \Session::get('success') }}</h3>
+            </div>
+        @endif
+        <form action="{{ route('products.cart.index') }}" method="get">
             <input class="btn btn-primary" type="submit" value="Корзина">
         </form>
         <table class="table table-striped">

@@ -1,8 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.layout')
 @section('content')
 
     <div style="height: 135px; content: ''; width: 100%; color: gray;"></div>
     <div class="container">
+        {{--{{ dd(Cart::content()) }}--}}
+        {{--{{ $a = \DB::table('shoppingcart')->select('identifier')-get() }}--}}
+{{--        @foreach(App\Order::all() as $row)--}}
+        {{--{{ dd($row->cost) }}--}}
+        {{--@endforeach--}}
+{{--        {{ dd($order->cost) }}--}}
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -40,26 +46,34 @@
                 @endforeach
                 </tbody>
             </table>
-            {{--<form action="{{ route('products.order') }}" method="get">--}}
-                {{--{{ csrf_field() }}--}}
-                {{--<input type="hidden" name="_method" value="order" />--}}
-                {{--<input type="submit" value="Оформить заказ" />--}}
-            {{--</form>--}}
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <form action="{{ route('products.index') }}" method="get">
                         <input class="btn btn-primary" type="submit" value="Вернуться к покупкам">
                     </form>
                 </div>
-                <div class="col-md-4">
-                    <p style="color: blue;">Общая стоимость: {{ $total }} грн</p>
+                <div class="col-md-3">
+                    <form action="{{ route('products.checkout.show') }}" method="get">
+                        {{ csrf_field() }}
+                        <input class="btn btn-success" type="submit" value="Оформить заказ" />
+                    </form>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <form action="{{ route('products.cart.destroy') }}" method="get">
                         <input class="btn btn-danger" type="submit" value="Очистить корзину">
                     </form>
                 </div>
+                <div class="col-md-3">
+                    <p style="color: blue;">Общая стоимость: {{ $total }} грн</p>
+                </div>
             </div>
+        <div class="row">
+            @if(\Session::has('message'))
+                <div class="col-md-12">
+                    <h3 style="color:red;">{{ \Session::get('message') }}</h3>
+                </div>
+            @endif
+        </div>
         </div>
 
 @endsection

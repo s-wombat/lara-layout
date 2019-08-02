@@ -114,7 +114,7 @@
                             <div class="form-group row mb-0">
                                 <label for="publishCheck" class="col-md-4 col-form-label text-md-right">{{ __('Publish') }}</label>
                                 <p style="color: red;">
-                                    @if($product->publish == 0)
+                                    @if(isset($product) && $product->publish == 0)
                                         Не опубликовано
                                     @else
                                         Опубликовано

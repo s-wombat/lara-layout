@@ -1,30 +1,29 @@
 <header class="header">
     <div class="header_container">
+{{--        {{ dd(\App\Category::all()) }}--}}
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                        <div class="logo"><a href="#">Sublime.</a></div>
+                        <div class="logo"><a href="{{ url('/') }}">Sublime.</a></div>
                         <nav class="main_nav">
                             <ul>
                                 <li class="hassubs active">
-                                    <a href="index.html">Home</a>
+                                    <a href="{{ url('/') }}">Home</a>
                                     <ul>
                                         <li><a href="categories.html">Categories</a></li>
                                         <li><a href="{{ route('products.index') }}">Products</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
-                                        <li><a href="checkout.html">Check out</a></li>
+                                        <li><a href="{{ route('products.cart.index') }}">Cart</a></li>
+                                        <li><a href="{{ route('products.checkout.show') }}">Check out</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
                                 </li>
                                 <li class="hassubs">
                                     <a href="categories.html">Categories</a>
                                     <ul>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
+                                        @foreach(\App\Category::all() as $row)
+                                            <li><a href="{{ $row->title }}">{{ $row->title }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </li>
                                 <li><a href="#">Accessories</a></li>
@@ -34,7 +33,7 @@
                         </nav>
                         <div class="header_extra ml-auto">
                             <div class="shopping_cart">
-                                <a href="cart.html">
+                                <a href="{{ route('products.cart.index') }}">
                                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                          viewBox="0 0 489 489" style="enable-background:new 0 0 489 489;" xml:space="preserve">
 											<g>
@@ -94,6 +93,7 @@
 
     @if (Route::has('login'))
         @auth
+            @if(Auth::user()->name == 'admin')
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -103,6 +103,7 @@
                 </div>
             </div>
         </div>
+            @endif
         @endauth
     @endif
 
@@ -133,51 +134,3 @@
         </ul>
     </div>
 </header>
-<!-- Menu -->
-<div class="menu menu_mm trans_300">
-    <div class="menu_container menu_mm">
-        <div class="page_menu_content">
-
-            <div class="page_menu_search menu_mm">
-                <form action="#">
-                    <input type="search" required="required" class="page_menu_search_input menu_mm" placeholder="Search for products...">
-                </form>
-            </div>
-            <ul class="page_menu_nav menu_mm">
-                <li class="page_menu_item has-children menu_mm">
-                    <a href="index.html">Home<i class="fa fa-angle-down"></i></a>
-                    <ul class="page_menu_selection menu_mm">
-                        <li class="page_menu_item menu_mm"><a href="categories.html">Categories<i class="fa fa-angle-down"></i></a></li>
-                        <li class="page_menu_item menu_mm"><a href="product.html">Product<i class="fa fa-angle-down"></i></a></li>
-                        <li class="page_menu_item menu_mm"><a href="cart.html">Cart<i class="fa fa-angle-down"></i></a></li>
-                        <li class="page_menu_item menu_mm"><a href="checkout.html">Checkout<i class="fa fa-angle-down"></i></a></li>
-                        <li class="page_menu_item menu_mm"><a href="contact.html">Contact<i class="fa fa-angle-down"></i></a></li>
-                    </ul>
-                </li>
-                <li class="page_menu_item has-children menu_mm">
-                    <a href="categories.html">Categories<i class="fa fa-angle-down"></i></a>
-                    <ul class="page_menu_selection menu_mm">
-                        <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-                        <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-                        <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-                        <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-                    </ul>
-                </li>
-                <li class="page_menu_item menu_mm"><a href="index.html">Accessories<i class="fa fa-angle-down"></i></a></li>
-                <li class="page_menu_item menu_mm"><a href="#">Offers<i class="fa fa-angle-down"></i></a></li>
-                <li class="page_menu_item menu_mm"><a href="contact.html">Contact<i class="fa fa-angle-down"></i></a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-
-    <div class="menu_social">
-        <ul>
-            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-        </ul>
-    </div>
-</div>

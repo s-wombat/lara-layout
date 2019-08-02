@@ -74,7 +74,6 @@ class ProductController extends Controller
         $list = $request->input('category');
         if($list){
             $listCategories = array_unique($list);
-//        dd($listCategories);
             $product->categories()->detach();
             foreach ($listCategories as $category_id){
                 if($category_id){

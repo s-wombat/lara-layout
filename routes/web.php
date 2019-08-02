@@ -34,6 +34,12 @@ Route::prefix('products')
             Route::get('/destroy', 'CartController@destroy')->name('destroy');
             Route::get('/update/{id}', 'CartController@update')->name('update');
     });
+    Route::prefix('checkout')
+    ->name('checkout.')
+    ->group(function(){
+        Route::get('/', 'CheckoutController@show')->name('show');
+        Route::get('/order', 'OrderController@create')->name('create');
+    });
 
 });
 
